@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <meta charset="UTF-8"> -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>Hospital Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Hospital Management System</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#" id="home">Home</a></li>
+            <li><a href="#" id="patients">Patients</a></li>
+            <li><a href="#" id="doctors">Doctors</a></li>
+            <li><a href="bill.html" id="generate-bill">Generate Bill</a></li>
+        </ul>
+    </nav>
+    <form action="connect.php" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required><br><br>
+        
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender"required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select><br><br>
+        
+        <button type="button" onclick="addPatient()">Add Patient</button>
+    </form>
+    
+    <h2>Patients</h2>
+    
+    <ul id="patientList">
+    </ul>
+    <h1>Doctor Appointment Booking</h1>
+    
+    <form id="appointmentForm">
+        <label for="doctor">Select Doctor:</label>
+        <select id="doctor" name="doctor">
+            <option value="dr_smith">Dr. Smith</option>
+            <option value="dr_jones">Dr. Jones</option>
+            <option value="dr_Donna">Dr. Donna</option>
+            <!-- Add more doctors here -->
+        </select><br>
+        
+        <label for="date">Select Date:</label>
+        <input type="date" id="date" name="date" required><br>
+        
+        <label for="time">Select Time Slot:</label>
+        <select id="time" name="time">
+            <option value="9am">9:00 AM</option>
+            <option value="10am">10:30 AM</option>
+            <option value="11am">12:00 AM</option>
+            <!-- Add more time slots here -->
+        </select><br>
+        
+        <button type="submit">Book Appointment</button>
+    </form>
+    
+    <p id="confirmation"></p>
+    
+    <script>
+        document.getElementById("appointmentForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            // Get form values
+            var doctor = document.getElementById("doctor").value;
+            var date = document.getElementById("date").value;
+            var time = document.getElementById("time").value;
+            
+            // You can process the appointment booking here (e.g., send to a server).
+            // For this example, let's just display a confirmation message.
+            var confirmationMessage = "Appointment booked with " + doctor + " on " + date + " at " + time + ".";
+            document.getElementById("confirmation").textContent = confirmationMessage;
+        });
+    </script>
+    
+    <script>
+        function addPatient() {
+            var name = document.getElementById("name").value;
+            var age = document.getElementById("age").value;
+            var gender = document.getElementById("gender").value;
+            
+            var patient = {
+                name: name,
+                age: age,
+                gender: gender
+            };
+            
+            var patientList = document.getElementById("patientList");
+            var listItem = document.createElement("li");
+            listItem.textContent = "Name: " + patient.name + ", Age: " + patient.age + ", Gender: " + patient.gender;
+            patientList.appendChild(listItem);
+            
+            document.getElementById("patientForm").reset();
+        }
+    </script>    
+    <main>
+        <section id="content">
+            <!-- Content will be dynamically loaded here -->
+        </section>
+    </main>
+    <footer>
+        <p>&copy; Darvey Hospital Management System</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
